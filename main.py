@@ -28,10 +28,8 @@ def kafka_server_start():
     except Exception as e:
         print("kafka server starting error:", str(e))
 
-zookeeper_tread = threading.Thread(target=zookeeper_start).start()
-print("zookeeper started successfully.")
-kafka_server_tread = threading.Thread(target=kafka_server_start).start()
-print("kafka server started successfully.")
+zookeeper_thread = threading.Thread(target=zookeeper_start)
+kafka_server_thread = threading.Thread(target=kafka_server_start)
 
 producer.producer_start(transactions_number=15)
 consumer.consumer_start()

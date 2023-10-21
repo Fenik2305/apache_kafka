@@ -6,11 +6,11 @@ from kafka import KafkaConsumer
 
 
 def consumer_start(topic_name="btcusd"):
-    consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest', bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000)
+    consumer = KafkaConsumer(topic_name, auto_offset_reset='latest', bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000)
+    time.sleep(5000)
     maxs = []
     n = 0
     for msg in consumer:
-        time.sleep(0.1)
         record = json.loads(msg.value)
         price = 0 if float(record["data"]['price']) == 999999999.0 else float(record["data"]['price'])
         maxs.append(price)

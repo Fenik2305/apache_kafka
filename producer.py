@@ -54,7 +54,6 @@ def producer_start(transactions_number=30, topic_name="btcusd", key="raw"):
         kafka_producer = connect_kafka_producer()
 
         for num in range(transactions_number):
-            time.sleep(0.1)
             message = websocket.recv()
             print(f"{num}: {message}")
             publish_message(kafka_producer, topic_name, key, message)
